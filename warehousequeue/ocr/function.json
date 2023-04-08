@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "name": "queueStorage",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "queue5",
+      "connection": "queueKey"
+    }
+  ]
+}
