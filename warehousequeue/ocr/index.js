@@ -1,31 +1,35 @@
-const request = require('request');
-
 module.exports = async function (context, myQueueItem) {
-    
-    context.log('JavaScript queue trigger function processed work item', myQueueItem);
-    context.log("Name:", process.env["ocrKey"])
-    
-    // var headersInfo = new Headers();
-    // headersInfo.append("Ocp-Apim-Subscription-Key", "26019dab75d94c86b52b07cebb546f23");
-    // headersInfo.append("Content-Type", "application/json");
-
-    const options = {
-        url: `https://${process.env["ocrURL"]}/computervision/imageanalysis:analyze?features=caption,read&model-version=latest&language=en&api-version=2023-02-01-preview`,
+    const result = await fetch(`https://${process.env["ocrURL"]}/computervision/imageanalysis:analyze?features=caption,read&model-version=latest&language=en&api-version=2023-02-01-preview`, {
         method: 'POST',
         headers: {
             'Ocp-Apim-Subscription-Key': process.env["ocrKey"],
             'Content-Type': 'application/json'
         },
-        body: "{'url':'https://learn.microsoft.com/azure/cognitive-services/computer-vision/media/quickstarts/presentation.png'}"
-    };
-    
-    function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            // console.log(body);
-            console.log("It works");
+        body: `{'url': '${myQueueItem}'}`
+    });
 
+    const json = await result.json();
+    const contents = json["readResult"].content;
+    const allInfo = contents.split("\n");
+
+    let dict = {};
+    let parts;
+    for (let pair of allInfo) {
+        if (pair.includes(": ")){
+            parts = pair.split(": ");
+            key = parts[0];
+            value = parts[1];
+        }
+
+        if (key in dict){
+            dict[key] = dict[key] + " " + pair
+        }
+        else{
+            // Key not in dict
+            dict[key] = parts[1];
         }
     }
-    request(options, callback);
+
+    context.bindings.cosmosDB = JSON.stringify(dict);
 };
 

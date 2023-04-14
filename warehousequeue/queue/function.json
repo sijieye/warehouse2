@@ -1,6 +1,9 @@
 {
   "bindings": [
     {
+      "methods": [
+        "post"
+      ],
       "type": "httpTrigger",
       "direction": "in",
       "authLevel": "function",

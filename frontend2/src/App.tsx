@@ -16,6 +16,18 @@ function App() {
   //   console.log(url)
   // };
 
+  const handleSubmit = async () => {
+    fetch(`http://localhost:7071/api/queue`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: url
+    })
+    console.log(url)
+
+  }
+
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Grid container spacing={2} style={{ padding: "1rem" }}>
@@ -28,7 +40,7 @@ function App() {
         <Grid xs={12} container alignItems="center" justifyContent="center">
           <FormControl style={{display: "inline"}}>
             <TextField InputProps={{style: {marginRight: "10px", width: '40em'}}} name="urlInsert" onInput={ event=>setURL((event.target as HTMLInputElement).value)} />
-            <Button style={{marginTop: "6px"}} type="submit" variant="outlined" onClick={() => alert(url)}>Submit</Button>
+            <Button style={{marginTop: "6px"}} type="submit" variant="outlined" onClick={() => handleSubmit()}>Submit</Button>
           </FormControl>
         </Grid>
       </Grid>

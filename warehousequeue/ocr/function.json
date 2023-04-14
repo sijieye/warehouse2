@@ -6,6 +6,14 @@
       "direction": "in",
       "queueName": "queue5",
       "connection": "queueKey"
+    },
+    {
+      "name": "cosmosDB",
+      "direction": "out",
+      "type": "cosmosDB",
+      "connectionStringSetting": "warehouseKey",
+      "databaseName": "warehouse",
+      "collectionName": "shipment"
     }
   ]
 }
