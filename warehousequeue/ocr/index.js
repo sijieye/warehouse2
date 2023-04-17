@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 module.exports = async function (context, myQueueItem) {
     const result = await fetch(`https://${process.env["ocrURL"]}/computervision/imageanalysis:analyze?features=caption,read&model-version=latest&language=en&api-version=2023-02-01-preview`, {
         method: 'POST',

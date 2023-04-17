@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.9"
   }
 }

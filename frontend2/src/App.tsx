@@ -1,49 +1,42 @@
 import React, { useEffect, useState } from "react";
-import logo from './logo.svg';
+import { SignedContext } from "./contexts/signedContext"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import './App.css';
-import { SelectChangeEvent } from '@mui/material/Select';
-import Grid from "@mui/material/Unstable_Grid2";
-import { Button, Typography, FormGroup, TextField, Box, FormControl,  } from "@mui/material";
+import {gapi} from 'gapi-script'
+import Sign from "./pages/signing"
+import EnterImage from "./components/enterImage";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const clientID = process.env["REACT_APP_CLIENT_ID"] as string
 
-  const [url, setURL] = useState<string>("");
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        client_id: clientID,
+        scope: ""
+      })
+    }
 
-  // const handleSubmit = (event: SelectChangeEvent) => {
-  //   // Store value selected, so selection box will display it
-  //   setURL(event.target.value);
+    gapi.load('client:auth2', start)
+  }, [])
 
-  //   console.log(url)
-  // };
-
-  const handleSubmit = async () => {
-    fetch(`http://localhost:7071/api/queue`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: url
-    })
-    console.log(url)
-
-  }
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
-      <Grid container spacing={2} style={{ padding: "1rem" }}>
-        <Grid xs={12} container alignItems="center" justifyContent="center">
-          <Typography variant="h2" gutterBottom>
-            Insert Image URL
-          </Typography>
-        </Grid>
-      
-        <Grid xs={12} container alignItems="center" justifyContent="center">
-          <FormControl style={{display: "inline"}}>
-            <TextField InputProps={{style: {marginRight: "10px", width: '40em'}}} name="urlInsert" onInput={ event=>setURL((event.target as HTMLInputElement).value)} />
-            <Button style={{marginTop: "6px"}} type="submit" variant="outlined" onClick={() => handleSubmit()}>Submit</Button>
-          </FormControl>
-        </Grid>
-      </Grid>
+      <SignedContext.Provider value={ {loggedIn, setLoggedIn} }>
+
+        <BrowserRouter>
+          <Routes>
+                <Route path="/" element = { <Sign/> } />
+                <Route  path="/enter" element = { <EnterImage/> } />
+          </Routes>
+        </BrowserRouter>
+
+      </SignedContext.Provider>
+
+        
     </div>
 
   );
