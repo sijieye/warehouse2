@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@azure/storage-blob": "^12.14.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@leecheuk/react-google-login": "^5.4.1",
@@ -15,6 +16,7 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "dotenv": "^16.0.3",
+    "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
