@@ -15,7 +15,6 @@
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "dotenv": "^16.0.3",
-    "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
@@ -46,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gapi-cjs": "^1.0.3"
   }
 }

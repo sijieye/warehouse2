@@ -35,16 +35,19 @@ jobs:
         working-directory: './${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
         run: |
           npm run build --if-present
-      # - name: npm test
-      #   working-directory: './${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
-      #   run: |
-      #     npm run test --if-present
+      - name: npm test
+        working-directory: './${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: |
+          npm run test --if-present
+
+      - name: Zip artifact for deployment
+        run: zip release.zip ./${{ env.AZURE_WEBAPP_PACKAGE_PATH }} -r
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,6 +61,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      
+      - name: unzip artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2

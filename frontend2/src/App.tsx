@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SignedContext } from "./contexts/signedContext"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {gapi} from 'gapi-script';
+import { gapi } from 'gapi-cjs';
 
 import './App.css';
 import Sign from "./pages/signing"
