@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SignedContext } from "./contexts/signedContext"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
