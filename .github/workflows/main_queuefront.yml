@@ -5,8 +5,6 @@ name: Build and deploy Node.js app to Azure Web App - queueFront
 
 on:
   push:
-    paths:
-      - "frontend2"
     branches:
       - main
   workflow_dispatch:
