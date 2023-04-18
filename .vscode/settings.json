@@ -4,5 +4,11 @@
     "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "npm prune (functions)"
+    "azureFunctions.preDeployTask": "npm prune (functions)",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/8331191a-cbe8-4e1e-b855-96cc7fcd7ad4/resourceGroups/Assignment5/providers/Microsoft.Web/sites/queueFront",
+    "appService.deploySubpath": "."
 }
