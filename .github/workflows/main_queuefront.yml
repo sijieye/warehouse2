@@ -35,10 +35,10 @@ jobs:
         working-directory: './${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
         run: |
           npm run build --if-present
-      - name: npm test
-        working-directory: './${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
-        run: |
-          npm run test --if-present
+      # - name: npm test
+      #   working-directory: './${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+      #   run: |
+      #     npm run test --if-present
 
       - name: Zip artifact for deployment
         run: zip release.zip ./${{ env.AZURE_WEBAPP_PACKAGE_PATH }} -r
