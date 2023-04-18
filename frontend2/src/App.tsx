@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { SignedContext } from "./contexts/signedContext"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {gapi} from 'gapi-script';
 
 import './App.css';
-import {gapi} from 'gapi-script'
 import Sign from "./pages/signing"
 import EnterImage from "./components/enterImage";
 
