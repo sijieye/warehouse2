@@ -1,17 +1,14 @@
 import { useContext } from "react";
-import { GoogleLogout} from 'react-google-login'
+import { GoogleLogout} from '@leecheuk/react-google-login';
 import { SignedContext } from "../contexts/signedContext";
 
 
 function Sign(){
-    const clientID = process.env["REACT_APP_CLIENT_ID"] as string
-
-    const { setLoggedIn } = useContext(SignedContext)
+    const { setLoggedIn, clientID } = useContext(SignedContext)
 
     const onSuccessLogout = () => {
         setLoggedIn(false);
     }
-
 
     return(
         <div id="signButton">

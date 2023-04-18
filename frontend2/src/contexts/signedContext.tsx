@@ -1,13 +1,17 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 
 type SignedContextType = {
-    loggedIn: boolean,
-    setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
-  }
-  
-  const infoSignedContextState = {
-    loggedIn: false,
-    setLoggedIn: () => {}
-  }
-  
-  export const SignedContext = createContext<SignedContextType>(infoSignedContextState)
+  loggedIn: boolean,
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
+  clientID: string,
+  queueKey: string
+}
+
+const infoSignedContextState = {
+  loggedIn: false,
+  setLoggedIn: () => {},
+  clientID: "",
+  queueKey: ""
+}
+
+export const SignedContext = createContext<SignedContextType>(infoSignedContextState)

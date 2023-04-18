@@ -1,13 +1,11 @@
 import { useContext } from "react";
-import { GoogleLogin } from 'react-google-login'
+import { GoogleLogin } from '@leecheuk/react-google-login'
 import { useNavigate } from "react-router-dom";
 import { SignedContext } from "../contexts/signedContext";
 
 
 function LogIn(){
-    const clientID = process.env["REACT_APP_CLIENT_ID"] as string;
-
-    const { setLoggedIn } = useContext(SignedContext)
+    const { setLoggedIn, clientID } = useContext(SignedContext)
     const navigate = useNavigate();
 
     const onSuccessLogin = (res: any) => {

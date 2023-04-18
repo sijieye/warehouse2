@@ -7,16 +7,15 @@ import LogOut from "./logOut";
 
 function EnterImage() {
   const [url, setURL] = useState<string>("");
-  const {loggedIn} = useContext(SignedContext)
+  
+  const {loggedIn, queueKey} = useContext(SignedContext)
 
   if(!loggedIn){
     return <Navigate to="/" />
   }
-
-  const queueAPI = process.env["REACT_APP_QUEUE_URL"] as string;
   
   const handleSubmit = async () => {
-    fetch(queueAPI, {
+    fetch(queueKey, {
       mode: "no-cors",
       method: "POST",
       headers: {
